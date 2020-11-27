@@ -1,8 +1,12 @@
-import {useState, useEffect} from 'react';
+// import {useState, useEffect} from 'react';
+import Nav from '../Nav/Nav';
 
 const Forum = () => {
     return (
-        <div>this is the forum</div>
+        <div>
+            <Nav />
+            this is the forum
+        </div>
     )
 }
 

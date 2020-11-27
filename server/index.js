@@ -33,6 +33,12 @@ massive({
 app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.post('/api/logout', authCtrl.logout);
+app.put('/api/bands', authCtrl.editUser);
+app.get('/api/bands', authCtrl.getUser);
+app.post('/api/shows', bandCtrl.createShow);
+app.get('/api/shows', bandCtrl.getAllShows);
+app.get('/api/shows/:showid', bandCtrl.getOneShow);
+app.delete('/api/shows/:showid', bandCtrl.deleteShow);
 
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));

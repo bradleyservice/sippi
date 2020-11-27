@@ -50,10 +50,10 @@ module.exports = {
         req.session.destroy();
         res.sendStatus(200);
     },
-    getUser = (req, res) => {
+    getUser: (req, res) => {
         res.status(200).send(req.session.user)
     },
-    editUser = async (req, res) => {
+    editUser: async (req, res) => {
         //want the user to be able to update their profile picture once they log in
         //and not worry about it during the register phase
         const db = req.app.get('db');
