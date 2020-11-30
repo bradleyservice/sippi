@@ -12,14 +12,14 @@ const Dashboard = (props) => {
     useEffect(() => {
         getShows()
     }, [])
-
+    
     return (
         <div>
             <Nav />
             {props.showPosts.map((elem, index) => {
-                return <ul key={`${elem.band_id}-${index}`} style={{listStyle: 'none', border: "3px, black"}}>
+                return <ul key={`${elem.band_id}-${index}`} style={{listStyle: 'none', border: "3px, solid, #000000"}}>
                     <li><h3>Show Title: </h3>{elem.title} </li>
-                    <li><h3>Image: </h3>{elem.img} </li>
+                    <li><h3>Image: </h3><img src={elem.img} alt='show poster'/> </li>
                     <li><h3>Show Description: </h3>{elem.content}</li>
                 </ul>
             })}

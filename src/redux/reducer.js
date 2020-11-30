@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const initialState = {
     user: {},
-    showPosts: [{title: "rock'n'roll dilemma", img: "img here", content: "get out to gig yall", band_id: 3}, {title: "miss me with that", img: "another img here", content: "ain't nobody got time for that", band_id: 3}],
+    showPosts: [],
     forumPosts: [],
     isLoggedIn: false
 }
@@ -12,9 +12,11 @@ const LOGOUT_USER = "LOGOUT_USER";
 const GET_USER = "GET_USER";
 const GET_SHOW_POSTS = "GET_SHOW_POSTS";
 const GET_FORUM_POSTS = "GET_FORUM_POSTS";
-// const ADD_SHOW = "ADD_SHOW";
+const ADD_SHOW = "ADD_SHOW";
+const EDIT_USER_INFO = "EDIT_USER_INFO";
 
-export function loginUser (user){
+export function loginUser (){
+    const user = axios.get('/api/bands').then(res => res.data).catch(err => console.log('err on loginUser func back end', err))
     return {
         type: LOGIN_USER,
         payload: user
@@ -52,6 +54,23 @@ export function getUser (){
     }
 }
 
+export function updateUser (){
+    const user = axios.put('/api/bands').then(res => res.data).catch(err => console.log('err on updateUser func, back end', err))
+    return {
+        type: EDIT_USER_INFO,
+        payload: user
+    }
+}
+
+export function addNewShow (title, img, content, id){
+    const newShow = axios.post('/api/shows', {title, img, content, id}).then(res => res.data).catch(err => console.log('err on addShow func, back end', err))
+    
+    return {
+        type: ADD_SHOW,
+        payload: newShow
+    }
+}
+
 export default function reducer(state = initialState, action){
     switch(action.type){
         case LOGIN_USER:
@@ -67,6 +86,14 @@ export default function reducer(state = initialState, action){
         case GET_USER + "_FULFILLED":
             return {...state, user: action.payload, isLoggedIn: true}
         case GET_USER + "_REJECTED":
+            return initialState
+        case EDIT_USER_INFO:
+            return {...state, user: action.payload, isLoggedIn: true}
+        case ADD_SHOW + "_PENDING":
+            return state
+        case ADD_SHOW + "_FULFILLED":
+            return {...state, showPosts: action.payload, isLoggedIn: true}
+        case ADD_SHOW + "_REJECTED":
             return initialState
         default:
             return state
