@@ -64,7 +64,7 @@ const Nav = (props) => {
         </header>
     )
 }
-
+// cant pull showPosts off of state AND state (which includes props.isLoggedIn) so my logout button doesn't show up
 const mapStateToProps = state => state;
 
 export default connect(mapStateToProps, {logoutUser, getUser})(withRouter(Nav))
