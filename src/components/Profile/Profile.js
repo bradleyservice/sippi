@@ -2,16 +2,18 @@ import {useState} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import BandInfo from '../BandInfo/BandInfo';
+import {updateUser} from '../../redux/reducer';
 
 const Profile = (props) => {
 
     const [edit, setEdit] = useState(false)
     const [input, setInput] = useState('')
 
-    const editUser = async (img) => {
+    const editUser = (img) => {
         try {
-            const res = await axios.put('/api/bands', {img})
-            props.updateUser(res.data)
+            axios.put('/api/bands', {img})
+            // props.updateUser(img) -- was sending an empty image back to the reducer?
         } catch(err){
             console.log('err on editUser func, front end', err)
         }
@@ -23,7 +25,7 @@ const Profile = (props) => {
             <div>
                 {props.user.profile_pic === null ? 
                 <i class="far fa-image fa-10x"></i>
-                : <img src={props.user.profile_pic} style={{width: '150px', height: '150px', borderRadius: '50%'}} alt='profile' />}
+                : <img src={props.user.profile_pic} style={{width: '200px', height: '200px', borderRadius: '50%'}} alt='profile' />}
                 {edit ?
                     <input
                     value={input}
@@ -44,9 +46,12 @@ const Profile = (props) => {
                     setEdit(!edit)
                 }}>Edit Profile Picture</button>}
             </div>
-            <span>
-                hello, {props.user.username}
-            </span>
+            <div>
+                <span>
+                    hello, {props.user.username}
+                </span>
+            </div>
+            <BandInfo />
         </div>
     )
 }
@@ -55,4 +60,4 @@ const Profile = (props) => {
 
 const mapStateToProps = state => ({user: state.user})
 
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps, {updateUser})(Profile)

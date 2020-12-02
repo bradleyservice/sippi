@@ -34,13 +34,35 @@ module.exports = {
     },
     deleteShow: async (req, res) => {
         const db = req.app.get('db');
-        const {showid} = req.params;
+        const {id} = req.params;
         try {
-            const shows = await db.delete_show(+showid)
+            const shows = await db.delete_show(id)
             res.status(200).send(shows)
         } catch(err){
-            console.log('err on deleteShow func', err)
+            console.log('err on deleteShow func, server', err)
             res.sendStatus(404)
+        }
+    },
+    addBandInfo: async (req, res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const {band_pic, band_name, band_description, band_genre} = req.body;
+        try {
+            let bandInfo = await db.add_band_info([band_pic, band_name, band_description, band_genre, id]);
+            res.status(200).send(bandInfo)
+        } catch(err){
+            console.log('err on addbandinfo func, serverside', err)
+            res.sendStatus(405)
+        }
+    },
+    getBandInfo: async (req, res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        try {
+            let info = await db.get_band_info(id)
+            res.status(200).send(info)
+        } catch(err){
+            console.log('err on getbandinfo func back end', err)
         }
     }
 }

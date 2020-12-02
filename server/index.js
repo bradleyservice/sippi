@@ -38,7 +38,9 @@ app.get('/api/bands', authCtrl.getUser);
 app.post('/api/shows', bandCtrl.createShow);
 app.get('/api/shows', bandCtrl.getAllShows);
 app.get('/api/shows/:showid', bandCtrl.getOneShow);
-app.delete('/api/shows/:showid', bandCtrl.deleteShow);
+app.delete('/api/shows/:id', bandCtrl.deleteShow);
+app.post('/api/bands', bandCtrl.addBandInfo);
+app.get('/api/band/info', bandCtrl.getBandInfo);
 
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));

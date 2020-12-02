@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {logoutUser, getUser} from '../../redux/reducer';
 import {withRouter, useHistory} from 'react-router-dom';
+import Fuse from 'fuse.js';
 
 const Nav = (props) => {
 
@@ -11,10 +12,23 @@ const Nav = (props) => {
 
     const history = useHistory();
 
+    const {getUser} = props;
     useEffect(() => {
-            props.getUser();
+            getUser();
     }, [])
     
+    const fuse = new Fuse(props.showPosts, {
+        keys: [
+            'title',
+            'img',
+            'content'
+        ],
+        includeScore: true
+    });
+
+    // const result = fuse.search(search)
+    // const showResults = result.map(show => show.item)
+    // console.log(result[0].item)
 
     const logout = () => {
         axios.post('/api/logout');
@@ -37,6 +51,16 @@ const Nav = (props) => {
             {props.isLoggedIn ?
             <button onClick={logout}>logout</button>
             : null}
+            {/* <div>
+                {showResults.map(shows => {
+                    const {title, img, content} = shows
+                    return <ul key={title} style={{listStyle: 'none'}}>
+                        <li>{title}</li>
+                        <li><img src={img} alt='show poster'style={{width: '200px'}}/></li>
+                        <li>{content}</li>
+                    </ul>
+                })}
+            </div> */}
         </header>
     )
 }

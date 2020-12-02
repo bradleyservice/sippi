@@ -13,6 +13,7 @@ const GET_USER = "GET_USER";
 const GET_SHOW_POSTS = "GET_SHOW_POSTS";
 const GET_FORUM_POSTS = "GET_FORUM_POSTS";
 const ADD_SHOW = "ADD_SHOW";
+const DELETE_SHOW = "DELETE_SHOW";
 const EDIT_USER_INFO = "EDIT_USER_INFO";
 
 export function loginUser (){
@@ -64,20 +65,28 @@ export function updateUser (){
 
 export function addNewShow (title, img, content, id){
     const newShow = axios.post('/api/shows', {title, img, content, id}).then(res => res.data).catch(err => console.log('err on addShow func, back end', err))
-    
     return {
         type: ADD_SHOW,
         payload: newShow
     }
 }
 
+export function deleteShow (id){
+    const shows = axios.delete(`/api/shows/${id}`).then(res => console.log(res.data)).catch(err => console.log('err on deleteshow func, reducer', err))
+    return {
+        type: DELETE_SHOW,
+        payload: shows
+    }
+}
+
 export default function reducer(state = initialState, action){
+    // console.log(action.type, action.payload)
     switch(action.type){
         case LOGIN_USER:
             return {...state, user: action.payload, isLoggedIn: true}
         case LOGOUT_USER:
             return {...state, ...action.payload}
-        case GET_SHOW_POSTS:
+        case GET_SHOW_POSTS + "_FULFILLED":
             return {...state, showPosts: action.payload, isLoggedIn: true}
         case GET_FORUM_POSTS:
             return {...state, forumPosts: action.payload, isLoggedIn: true}
@@ -95,6 +104,8 @@ export default function reducer(state = initialState, action){
             return {...state, showPosts: action.payload, isLoggedIn: true}
         case ADD_SHOW + "_REJECTED":
             return initialState
+        case DELETE_SHOW:
+            return {...state, showPosts: action.payload, isLoggedIn: true}
         default:
             return state
     }

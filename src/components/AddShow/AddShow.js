@@ -21,8 +21,7 @@ class AddShow extends Component {
         })
     }
     
-    makeShow = async (e) => {
-        e.preventDefault();
+    makeShow = async () => {
         const {title, img, content} = this.state;
         const {id} = this.props.user;
         try {
@@ -33,17 +32,22 @@ class AddShow extends Component {
         }
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.makeShow();
+    }
+
     render(){
         const {title, img, content} = this.state;
         return (
             <div>
                 <Nav />
                 <div>
-                    <form onSubmit={(e) => this.makeShow(e)}>
+                    <form onSubmit={(e) => this.handleSubmit(e)}>
                         <input name='title' placeholder='Show Title' value={title} onChange={e => this.changeHandler(e)} />
                         <input name='img' placeholder='Show Image' value={img} onChange={e => this.changeHandler(e)} />
                         <input name='content' placeholder='Show Description' value={content} onChange={e => this.changeHandler(e)} />
-                        <button>Submit</button>
+                        <button type='submit'>Submit</button>
                     </form>
                 </div>
             </div>
