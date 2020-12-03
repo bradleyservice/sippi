@@ -57,12 +57,23 @@ module.exports = {
     },
     getBandInfo: async (req, res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
+        // const {id} = req.session.user;
         try {
-            let info = await db.get_band_info(id)
+            let info = await db.get_band_info()
             res.status(200).send(info)
         } catch(err){
             console.log('err on getbandinfo func back end', err)
+        }
+    },
+    findShow: async (req, res) => {
+        const db = req.app.get('db');
+        const {search} = req.query;
+        try {
+            let show = await db.search_show(search);
+            res.status(200).send(show)
+        } catch(err){
+            console.log('err on server findshow', err)
+            res.sendStatus(501);
         }
     }
 }

@@ -15,6 +15,8 @@ const GET_FORUM_POSTS = "GET_FORUM_POSTS";
 const ADD_SHOW = "ADD_SHOW";
 const DELETE_SHOW = "DELETE_SHOW";
 const EDIT_USER_INFO = "EDIT_USER_INFO";
+const ADD_FORUM_POST = "ADD_FORUM_POST";
+
 
 export function loginUser (){
     const user = axios.get('/api/bands').then(res => res.data).catch(err => console.log('err on loginUser func back end', err))
@@ -79,6 +81,14 @@ export function deleteShow (id){
     }
 }
 
+export function addForum (post){
+    return {
+        type: ADD_FORUM_POST,
+        payload: post
+    }
+}
+
+
 export default function reducer(state = initialState, action){
     // console.log(action.type, action.payload)
     switch(action.type){
@@ -88,7 +98,7 @@ export default function reducer(state = initialState, action){
             return {...state, ...action.payload}
         case GET_SHOW_POSTS + "_FULFILLED":
             return {...state, showPosts: action.payload, isLoggedIn: true}
-        case GET_FORUM_POSTS:
+        case GET_FORUM_POSTS + "_FULFILLED":
             return {...state, forumPosts: action.payload, isLoggedIn: true}
         case GET_USER + "_PENDING":
             return state
@@ -106,6 +116,8 @@ export default function reducer(state = initialState, action){
             return initialState
         case DELETE_SHOW:
             return {...state, showPosts: action.payload, isLoggedIn: true}
+        case ADD_FORUM_POST:
+            return {...state, forumPosts: action.payload, isLoggedIn: true}
         default:
             return state
     }

@@ -16,6 +16,7 @@ const Dashboard = (props) => {
         const getInfo = async () => {
             try {
                 const res = await axios.get('/api/band/info')
+                console.log(res)
                 if(res.data[0].profile_pic){
                     setProfile(res.data[0].profile_pic)
                 }
@@ -25,7 +26,7 @@ const Dashboard = (props) => {
         }
         getInfo();
         getShows();
-    }, [])
+    }, [getShows])
 
     // const date = Date(document.data.date);
     // const formattedDate = Moment(date).startOf('day').fromNow()
@@ -42,24 +43,31 @@ const Dashboard = (props) => {
     return (
         <div>
             <Nav />
+            <h1>I am working</h1>
             {props.showPosts.map((elem, index) => {
                 return <ul key={`${elem.band_id}-${index}`}
                 style={{
                 listStyle: 'none',
-                border: '3px, solid, black'
+                border: '3px solid black',
+                width: '75vw',
+                margin: '0 auto',
+                marginTop: '10px',
+                marginBottom: '10px',
+                display: 'flex',
+                justifyContent: 'center', alignContent: 'center'
                 }}>
                     <div>
-                        <li><h3>User profile picture: </h3><img src={profile} alt='user profile' 
-                        style={{width: '100px', height: '100px', borderRadius: '50%'}}/></li>
+                        <span><img src={profile} alt='user profile' 
+                        style={{width: '100px', height: '100px', borderRadius: '50%'}}/></span>
                         <div>
-                            <li><h3>Show Title: </h3>{elem.title} </li>
-                            <li><h3>Image: </h3><img src={elem.img} alt='show poster' style={{width: "200px"}}/> </li>
-                            <li><h3>Show Description: </h3>{elem.content}</li>
-                            {props.user.id === elem.band_id ?
-                            <button onClick={() => {
-                                deleteShow(elem.id)
-                            }}>Delete This Show</button>
-                            : null}
+                                <span><p>Show Title: </p>{elem.title} </span>
+                                <span><p>Image: </p><img src={elem.img} alt='show poster' style={{width: "200px"}}/> </span>
+                                <span><p>Show Description: </p>{elem.content}</span>
+                                {props.user.id === elem.band_id ?
+                                <button onClick={() => {
+                                    deleteShow(elem.id)
+                                }}>Delete This Show</button>
+                                : null}
                         </div>
                     </div>
                 </ul>
@@ -68,6 +76,6 @@ const Dashboard = (props) => {
     )
 }
 
-const mapStateToProps = state => ({showPosts: state.showPosts, user: state.user})
+const mapStateToProps = state => ({showPosts: state.showPosts, user: state.user, ...state})
 
 export default connect(mapStateToProps, {getShows, deleteShow})(Dashboard)

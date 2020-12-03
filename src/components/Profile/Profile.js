@@ -24,7 +24,7 @@ const Profile = (props) => {
             <header><Nav /></header>
             <div>
                 {props.user.profile_pic === null ? 
-                <i class="far fa-image fa-10x"></i>
+                <i className="far fa-image fa-10x"></i>
                 : <img src={props.user.profile_pic} style={{width: '200px', height: '200px', borderRadius: '50%'}} alt='profile' />}
                 {edit ?
                     <input

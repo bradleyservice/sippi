@@ -6,6 +6,7 @@ const session = require('express-session');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 const authCtrl = require('./controllers/authController');
 const bandCtrl = require('./controllers/bandController');
+const forumCtrl = require('./controllers/forumController');
 
 const app = express();
 
@@ -37,10 +38,12 @@ app.put('/api/bands', authCtrl.editUser);
 app.get('/api/bands', authCtrl.getUser);
 app.post('/api/shows', bandCtrl.createShow);
 app.get('/api/shows', bandCtrl.getAllShows);
+app.get('/api/show', bandCtrl.findShow);
 app.get('/api/shows/:showid', bandCtrl.getOneShow);
 app.delete('/api/shows/:id', bandCtrl.deleteShow);
 app.post('/api/bands', bandCtrl.addBandInfo);
 app.get('/api/band/info', bandCtrl.getBandInfo);
+app.get('/api/forums', forumCtrl.getAllForums);
 
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));

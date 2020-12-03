@@ -2,7 +2,7 @@ import {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {loginUser} from '../../redux/reducer';
-import './Auth.css';
+import './Auth.scss';
 
 class Auth extends Component {
     constructor(){
@@ -53,12 +53,12 @@ class Auth extends Component {
     render(){
         const {email, username, password} = this.state;
         return (
-            <div >
+            <div className='auth'>
                 <h1 className='auth-brand'>sippi</h1>
                 {this.state.newUser ?
                 <div className='auth-box'>
                     <h2>Register</h2>
-                    <form onSubmit={e => this.register(e)}>
+                    <form onSubmit={e => this.register(e)} className='form-box'>
                         <input name='email' value={email} placeholder='Email' onChange={(e) => this.changeHandler(e)} /> <br/>
                         <input name='username' value={username} placeholder='Username' onChange={(e) => this.changeHandler(e)} /> <br/>
                         <input name='password' value={password} placeholder='Password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
@@ -69,7 +69,7 @@ class Auth extends Component {
                 :
                 <div className='auth-box'>
                     <h2>Login</h2>
-                    <form onSubmit={e => this.login(e)}>
+                    <form onSubmit={e => this.login(e)} className='form-box'>
                         <input name='email' value={email} placeholder='Email' onChange={(e) => this.changeHandler(e)} /> <br/>
                         <input name='password' value={password} placeholder='Password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
                         <button>Submit</button>

@@ -65,7 +65,7 @@ const BandInfo = (props) => {
 
     return (
         <div>
-            <div style={{backgroundColor: '#edeccd', width: '80vw', height: '5vh', margin: '0 auto', marginTop: '10px'}}>
+            <div style={{backgroundColor: '#eddcdc', width: '80vw', height: '5vh', margin: '0 auto', marginTop: '10px', border: '2px solid black'}}>
 
             </div>
             <div>
