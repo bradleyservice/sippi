@@ -9,14 +9,18 @@ import Nav from '../Nav/Nav';
 const Dashboard = (props) => {
 
     const [profile, setProfile] = useState('')
+    const [search, setSearch] = useState({
+        title: '',
+        img: '',
+        content:''
+    })
 
-    //try to get a request sent to redux state and return the list of show posts
+    const {title, img, content} = search;
     const {getShows} = props;
     useEffect(() => {
         const getInfo = async () => {
             try {
                 const res = await axios.get('/api/band/info')
-                console.log(res)
                 if(res.data[0].profile_pic){
                     setProfile(res.data[0].profile_pic)
                 }
@@ -28,6 +32,20 @@ const Dashboard = (props) => {
         getShows();
     }, [getShows])
 
+    const searchShow = async (search) => {
+        try {
+            let res = await axios.get(`/api/show/?search=${search}`)
+            setSearch(search => ({
+                ...search,
+                title: res.data[0].title,
+                img: res.data[0].img,
+                content: res.data[0].content
+            }))
+        } catch(err){
+            console.log('err on searchshow nav comp', err)
+        }
+    }
+
     // const date = Date(document.data.date);
     // const formattedDate = Moment(date).startOf('day').fromNow()
     
@@ -38,12 +56,18 @@ const Dashboard = (props) => {
         } catch(err){
             console.log('err on deleteshow func front end, dashboard', err)
         }
+        getShows();
     }
 
     return (
         <div>
-            <Nav />
-            <h1>I am working</h1>
+            <header><Nav searchShow={searchShow}/></header>
+            <div style={{border: '2px solid black', width: '75vw', margin: '0 auto'}}>
+                {title} <br/>
+                {img === '' ?
+                null
+                : <img src={img} alt='show' style={{width: '100px'}} /> } <p>{content}</p>
+            </div>
             {props.showPosts.map((elem, index) => {
                 return <ul key={`${elem.band_id}-${index}`}
                 style={{

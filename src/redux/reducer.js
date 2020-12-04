@@ -16,6 +16,7 @@ const ADD_SHOW = "ADD_SHOW";
 const DELETE_SHOW = "DELETE_SHOW";
 const EDIT_USER_INFO = "EDIT_USER_INFO";
 const ADD_FORUM_POST = "ADD_FORUM_POST";
+const EDIT_FORUM_POST = "EDIT_FORUM_POST";
 
 
 export function loginUser (){
@@ -88,6 +89,13 @@ export function addForum (post){
     }
 }
 
+export function editPost (posts){
+    return {
+        type: EDIT_FORUM_POST,
+        payload: posts
+    }
+}
+
 
 export default function reducer(state = initialState, action){
     // console.log(action.type, action.payload)
@@ -117,6 +125,8 @@ export default function reducer(state = initialState, action){
         case DELETE_SHOW:
             return {...state, showPosts: action.payload, isLoggedIn: true}
         case ADD_FORUM_POST:
+            return {...state, forumPosts: action.payload, isLoggedIn: true}
+        case EDIT_FORUM_POST:
             return {...state, forumPosts: action.payload, isLoggedIn: true}
         default:
             return state

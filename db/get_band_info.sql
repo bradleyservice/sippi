@@ -1,5 +1,5 @@
-SELECT bu.profile_pic, bs.*
+SELECT bu.profile_pic, bi.*
 FROM band_users bu
-INNER JOIN band_shows bs ON bu.id=bs.band_id;
--- WHERE bu.id & bs.band_id = $1
--- ORDER BY id DESC;
+INNER JOIN band_info bi ON bu.id=bi.band_id
+WHERE bu.id = $1
+ORDER BY id DESC;

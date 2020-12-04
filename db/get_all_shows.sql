@@ -1,1 +1,2 @@
-SELECT * FROM band_shows;
+SELECT * FROM band_shows
+ORDER BY id DESC;

@@ -49,6 +49,7 @@ module.exports = {
         const {band_pic, band_name, band_description, band_genre} = req.body;
         try {
             let bandInfo = await db.add_band_info([band_pic, band_name, band_description, band_genre, id]);
+            console.log(bandInfo)
             res.status(200).send(bandInfo)
         } catch(err){
             console.log('err on addbandinfo func, serverside', err)
@@ -57,9 +58,9 @@ module.exports = {
     },
     getBandInfo: async (req, res) => {
         const db = req.app.get('db');
-        // const {id} = req.session.user;
+        const {id} = req.session.user;
         try {
-            let info = await db.get_band_info()
+            let info = await db.get_band_info(id)
             res.status(200).send(info)
         } catch(err){
             console.log('err on getbandinfo func back end', err)

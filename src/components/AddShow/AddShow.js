@@ -2,7 +2,7 @@ import {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 // import axios from 'axios';
-import {addNewShow} from '../../redux/reducer';
+import {addNewShow, getShows} from '../../redux/reducer';
 
 class AddShow extends Component {
     constructor(props){
@@ -27,6 +27,7 @@ class AddShow extends Component {
         try {
             this.props.addNewShow(title, img, content, id)
             this.props.history.push('/dashboard')
+            this.props.getShows();
         } catch(err){
             console.log('err on addnewshow func front end', err)
         }
@@ -57,4 +58,4 @@ class AddShow extends Component {
 
 const mapStateToProps = state => ({user: state.user});
 //addShow function goes in here from reducer
-export default connect(mapStateToProps, {addNewShow})(AddShow)
+export default connect(mapStateToProps, {addNewShow, getShows})(AddShow)

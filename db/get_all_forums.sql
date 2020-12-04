@@ -1,1 +1,2 @@
-SELECT * FROM forums;
+SELECT * FROM forums
+ORDER BY id DESC;

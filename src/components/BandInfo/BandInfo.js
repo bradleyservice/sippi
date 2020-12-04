@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
 const BandInfo = (props) => {
+
     const [state, setState] = useState({
         band_pic: '',
         band_name: '',
@@ -32,6 +33,7 @@ const BandInfo = (props) => {
     }, [])
 
     const {band_pic, band_name, band_description, band_genre} = state;
+    // const {pic, name, description, genre} = input;
 
     const addInfo = () => {
         const {id} = props.user;
@@ -40,34 +42,22 @@ const BandInfo = (props) => {
         } catch(err){
             console.log('err on addinfo func, front end', err)
         }
-        // getInfo()
     }
 
     const handleChange = (e) => {
-        setState(state => ({
-            ...state,
-            [e.target.name]: e.target.value
-        }))
+        setState({...state, [e.target.name]: e.target.value})
+        // setInput({...input, [e.target.name]: e.target.value})
     }
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        addInfo(band_pic, band_name, band_description, band_genre);
-        // setState here just resets the display inputs and the displays itself...
-        // setState(state => ({
-        //     ...state,
-        //     band_pic: '',
-        //     band_name: '',
-        //     band_description: '',
-        //     band_genre: ''
-        // }))
+        addInfo(state);
+        // setSubmit(!submit);
     }
 
     return (
         <div>
-            <div style={{backgroundColor: '#eddcdc', width: '80vw', height: '5vh', margin: '0 auto', marginTop: '10px', border: '2px solid black'}}>
-
-            </div>
+            <div style={{backgroundColor: '#eddcdc', width: '80vw', height: '5vh', margin: '0 auto', marginTop: '10px', border: '2px solid black'}}></div>
             <div>
                 <h2>Band Photo: </h2><img src={band_pic} style={{width: '300px'}} alt='band'/>
                 <h2>Band Name:</h2> <span>{band_name}</span> <br/>

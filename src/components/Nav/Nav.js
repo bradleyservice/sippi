@@ -9,9 +9,6 @@ import {withRouter, useHistory} from 'react-router-dom';
 const Nav = (props) => {
 
     const [search, setSearch] = useState('')
-    const [showTitle, setShowTitle] = useState('')
-    const [showImg, setShowImg] = useState('')
-    const [showContent, setShowContent] = useState('')
 
     const history = useHistory();
 
@@ -21,27 +18,19 @@ const Nav = (props) => {
     }, [getUser])
     
 
-    const searchShow = async (e) => {
-        e.preventDefault();
-        try {
-            let res = await axios.get(`/api/show/?search=${search}`)
-            setShowTitle(res.data[0].title)
-            setShowImg(res.data[0].img)
-            setShowContent(res.data[0].content)
-            setSearch('')
-        } catch(err){
-            console.log('err on searchshow nav comp', err)
-        }
-    }
 
     const logout = () => {
         axios.post('/api/logout');
         props.logoutUser();
         history.push('/');
     }
+
     return (
         <header>
-            <form onSubmit={e => searchShow(e)}>
+            <form onSubmit={e => {
+                e.preventDefault();
+                props.searchShow(search)}
+            }>
                 <ul style={{listStyle: 'none'}}>
                     <li><h1>sippi</h1></li>
                     <li><input placeholder='search...' value={search} 
@@ -49,12 +38,6 @@ const Nav = (props) => {
                     <button>search for a show</button>
                 </ul>
             </form>
-            <div style={{border: '2px solid black', width: '75vw', margin: '0 auto'}}>
-                {showTitle} <br/>
-                {showImg === '' ?
-                <i className="far fa-image fa-3x"></i>
-                : <img src={showImg} alt='show' style={{width: '100px'}} /> } <p>{showContent}</p>
-            </div>
             <ul style={{listStyle: 'none'}}>
                 <li><Link to='/dashboard'>home</Link></li>
                 <li><Link to='/profile'>profile</Link></li>
@@ -67,7 +50,7 @@ const Nav = (props) => {
         </header>
     )
 }
-// cant pull showPosts off of state AND state (which includes props.isLoggedIn) so my logout button doesn't show up
+
 const mapStateToProps = state => ({showPosts: state.showPosts, ...state});
 
 export default connect(mapStateToProps, {logoutUser, getUser})(withRouter(Nav))

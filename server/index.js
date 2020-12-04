@@ -31,19 +31,23 @@ massive({
 }).catch(err => console.log(err))
 
 //ENDPOINTS
+app.get('/api/bands', authCtrl.getUser);
 app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.post('/api/logout', authCtrl.logout);
 app.put('/api/bands', authCtrl.editUser);
-app.get('/api/bands', authCtrl.getUser);
-app.post('/api/shows', bandCtrl.createShow);
+
 app.get('/api/shows', bandCtrl.getAllShows);
 app.get('/api/show', bandCtrl.findShow);
 app.get('/api/shows/:showid', bandCtrl.getOneShow);
-app.delete('/api/shows/:id', bandCtrl.deleteShow);
-app.post('/api/bands', bandCtrl.addBandInfo);
 app.get('/api/band/info', bandCtrl.getBandInfo);
+app.post('/api/shows', bandCtrl.createShow);
+app.post('/api/bands', bandCtrl.addBandInfo);
+app.delete('/api/shows/:id', bandCtrl.deleteShow);
+
 app.get('/api/forums', forumCtrl.getAllForums);
+app.post('/api/forums', forumCtrl.addPost);
+app.put('/api/forums/:id', forumCtrl.editPost);
 
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));
