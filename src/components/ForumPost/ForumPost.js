@@ -1,7 +1,8 @@
 import {useState} from 'react'
-import { addForum } from '../../redux/reducer';
+import { addForum, getForums} from '../../redux/reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 const ForumPost = (props) => {
 
@@ -11,9 +12,9 @@ const ForumPost = (props) => {
         content: ''
     })
 
-
+    const history = useHistory();
     const {title, img, content} = forum;
-    
+    const {getForums} = props;
 
     const addForumPost = () => {
         const {id} = props.user;
@@ -24,12 +25,6 @@ const ForumPost = (props) => {
         }
     }
 
-    const inputsArr = [
-        {name: 'title', placeholder: 'Post Title', value: title},
-        {name: 'img', placeholder: 'Image URL', value: img},
-        {name: 'content', placeholder: 'Content', value: content}
-    ]
-
     const handleChange = (e) => {
         setForum({...forum, [e.target.name]: e.target.value})
     }
@@ -38,14 +33,16 @@ const ForumPost = (props) => {
         e.preventDefault();
         addForum(forum);
         addForumPost(forum);
+        getForums();
+        history.push('/forum');
     }
 
     return (
         <div>
             <form onSubmit={e => handleSubmit(e)}>
-                {inputsArr.map(input => (
-                    <input key={input.name} name={input.name} placeholder={input.placeholder} value={input.value} onChange={e => handleChange(e)} />
-                ))}
+                <input name='title' placeholder='Post Title' value={title} onChange={e => handleChange(e)}/>
+                <input name='img' placeholder='Image URL' value={img} onChange={e => handleChange(e)}/>
+                <input name='content' placeholder='Content' value={content} onChange={e => handleChange(e)}/>
                 <button type='submit' >submit</button>
             </form>
         </div>
@@ -54,4 +51,4 @@ const ForumPost = (props) => {
 
 const mapStateToProps = state => ({user: state.user})
 
-export default connect(mapStateToProps)(ForumPost)
+export default connect(mapStateToProps, {getForums})(ForumPost)

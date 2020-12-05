@@ -7,6 +7,8 @@ const initialState = {
     isLoggedIn: false
 }
 
+//next time don't store arrays of constantly updated objects in redux, it's unnecessary and involves 1,000 more steps.
+
 const LOGIN_USER = "LOGIN_USER";
 const LOGOUT_USER = "LOGOUT_USER";
 const GET_USER = "GET_USER";
@@ -17,6 +19,7 @@ const DELETE_SHOW = "DELETE_SHOW";
 const EDIT_USER_INFO = "EDIT_USER_INFO";
 const ADD_FORUM_POST = "ADD_FORUM_POST";
 const EDIT_FORUM_POST = "EDIT_FORUM_POST";
+const DELETE_POST = "DELETE_POST";
 
 
 export function loginUser (){
@@ -96,6 +99,14 @@ export function editPost (posts){
     }
 }
 
+export function deletePost (id){
+    const posts = axios.delete(`/api/forums/${id}`).then(res => res.data).catch(err => console.log('err in reducer on deletepost', err))
+    return {
+        type: DELETE_POST,
+        payload: posts
+    }
+}
+
 
 export default function reducer(state = initialState, action){
     // console.log(action.type, action.payload)
@@ -127,6 +138,8 @@ export default function reducer(state = initialState, action){
         case ADD_FORUM_POST:
             return {...state, forumPosts: action.payload, isLoggedIn: true}
         case EDIT_FORUM_POST:
+            return {...state, forumPosts: action.payload, isLoggedIn: true}
+        case DELETE_POST:
             return {...state, forumPosts: action.payload, isLoggedIn: true}
         default:
             return state

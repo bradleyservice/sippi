@@ -8,7 +8,10 @@ import Nav from '../Nav/Nav';
 
 const Dashboard = (props) => {
 
-    const [profile, setProfile] = useState('')
+    const [profile, setProfile] = useState({
+        userPic: '',
+        username: ''
+    })
     const [search, setSearch] = useState({
         title: '',
         img: '',
@@ -16,13 +19,15 @@ const Dashboard = (props) => {
     })
 
     const {title, img, content} = search;
+    const {userPic, username} = profile;
     const {getShows} = props;
     useEffect(() => {
         const getInfo = async () => {
             try {
-                const res = await axios.get('/api/band/info')
-                if(res.data[0].profile_pic){
-                    setProfile(res.data[0].profile_pic)
+                const res = await axios.get('/api/shows')
+                console.log(res.data)
+                if(res.data[0].profile_pic && res.data[0].username){
+                    setProfile({userPic: res.data[0].profile_pic, username: res.data[0].username})
                 }
             } catch(err){
                 console.log('err in getinfo on dashboard for profpic', err)
@@ -81,12 +86,13 @@ const Dashboard = (props) => {
                 justifyContent: 'center', alignContent: 'center'
                 }}>
                     <div>
-                        <span><img src={profile} alt='user profile' 
-                        style={{width: '100px', height: '100px', borderRadius: '50%'}}/></span>
+                        <span><img src={userPic} alt='user profile' 
+                        style={{width: '100px', height: '100px', borderRadius: '50%'}}/>{username}</span>
+                        {/* try and get the user's information who MADE the post, not just the user who is logged in */}
                         <div>
-                                <span><p>Show Title: </p>{elem.title} </span>
-                                <span><p>Image: </p><img src={elem.img} alt='show poster' style={{width: "200px"}}/> </span>
-                                <span><p>Show Description: </p>{elem.content}</span>
+                                <span><h4>Show Title: </h4>{elem.title} </span>
+                                <span><h4>Image: </h4><img src={elem.img} alt='show poster' style={{width: "200px"}}/> </span>
+                                <span><h4>Show Description: </h4>{elem.content}</span>
                                 {props.user.id === elem.band_id ?
                                 <button onClick={() => {
                                     deleteShow(elem.id)

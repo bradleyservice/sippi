@@ -35,6 +35,7 @@ class Auth extends Component {
             this.props.history.push('/dashboard')
         } catch(err){
             console.log('problem with login func front end', err)
+            alert('Incorrect Login Information, try again')
         }
     }
 
@@ -47,6 +48,7 @@ class Auth extends Component {
             this.props.history.push('/dashboard')
         } catch(err){
             console.log('err in register func front end', err)
+            alert('Incorrect information, try again')
         }
     }
 

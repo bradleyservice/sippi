@@ -17,7 +17,15 @@ const Nav = (props) => {
             getUser();
     }, [getUser])
     
-
+    const searchBar = () => {
+        if(props.location.pathname === "/forum"){
+            props.searchForum(search)
+        } else if(props.location.pathname === "/dashboard"){
+            props.searchShow(search)
+        } else {
+            history.push('/dashboard')
+        }
+    }
 
     const logout = () => {
         axios.post('/api/logout');
@@ -29,13 +37,14 @@ const Nav = (props) => {
         <header>
             <form onSubmit={e => {
                 e.preventDefault();
-                props.searchShow(search)}
-            }>
+                searchBar();
+                setSearch('')
+            }}>
                 <ul style={{listStyle: 'none'}}>
                     <li><h1>sippi</h1></li>
                     <li><input placeholder='search...' value={search} 
                     name='search' onChange={(e) => setSearch(e.target.value)} /></li>
-                    <button>search for a show</button>
+                    <button>search</button>
                 </ul>
             </form>
             <ul style={{listStyle: 'none'}}>

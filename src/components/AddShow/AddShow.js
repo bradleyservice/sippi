@@ -51,6 +51,10 @@ class AddShow extends Component {
                         <button type='submit'>Submit</button>
                     </form>
                 </div>
+                <h2>show preview:</h2>
+                <h4>title: </h4><div>{title}</div>
+                <h4>show poster: </h4>{img === '' ? null : <img src={img} alt='show' style={{width: '200px'}}/>}
+                <h4>description: </h4><div>{content}</div>
             </div>
         )
     }

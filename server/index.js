@@ -46,8 +46,10 @@ app.post('/api/bands', bandCtrl.addBandInfo);
 app.delete('/api/shows/:id', bandCtrl.deleteShow);
 
 app.get('/api/forums', forumCtrl.getAllForums);
+app.get('/api/forum', forumCtrl.findForum);
 app.post('/api/forums', forumCtrl.addPost);
 app.put('/api/forums/:id', forumCtrl.editPost);
+app.delete('/api/forums/:id', forumCtrl.deletePost);
 
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));

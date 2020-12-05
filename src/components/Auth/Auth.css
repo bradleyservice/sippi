@@ -1,9 +1,24 @@
+.auth {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .auth .auth-box {
   background-color: #3973A8;
   width: 45vw;
   height: 45vh;
   border: 2px solid black;
   margin: 0 auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 200px;
+}
+
+.auth .auth-box h2 {
+  color: white;
+  -webkit-text-stroke: 1px black;
 }
 
 .auth .auth-brand {
