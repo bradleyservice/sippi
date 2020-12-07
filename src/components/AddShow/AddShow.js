@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 // import axios from 'axios';
 import {addNewShow, getShows} from '../../redux/reducer';
+import Email from '../Email/Email';
 
 class AddShow extends Component {
     constructor(props){
@@ -55,6 +56,7 @@ class AddShow extends Component {
                 <h4>title: </h4><div>{title}</div>
                 <h4>show poster: </h4>{img === '' ? null : <img src={img} alt='show' style={{width: '200px'}}/>}
                 <h4>description: </h4><div>{content}</div>
+                <Email />
             </div>
         )
     }

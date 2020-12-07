@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import Nav from '../Nav/Nav';
 import ForumPost from '../ForumPost/ForumPost';
 import axios from 'axios';
+import Email from '../Email/Email';
 
 
 const Forum = (props) => {
@@ -19,18 +20,38 @@ const Forum = (props) => {
         newImg: '',
         newContent: ''
     })
+
+    const [forum, setForum] = useState([])
     
     const [edit, setEdit] = useState(false);
 
     const {getForums} = props;
     const {title, img, content} = post;
     const {newTitle, newImg, newContent} = newPost;
-
+    
     useEffect(() => {
+        const getForumPosts = async () => {
+            try {
+                let res = await axios.get('/api/forums')
+                if(res.data[0].profile_pic && res.data[0].username){
+                    setForum(res.data)
+                }
+            } catch(err){
+                console.log('err on getforumposts', err)
+            }
+        }
+        getForumPosts();
         getForums();
     }, [getForums])
 
-    
+    const getPosts = async () => {
+        try {
+            const res = await axios.get('/api/forums')
+            setForum(res.data)
+        } catch(err){
+            console.log('err in getposts in forum', err)
+        }
+    }
     const editPost = (postid) => {
         const {id} = props.user;
         try {
@@ -38,6 +59,7 @@ const Forum = (props) => {
         } catch(err){
             console.log('err on editpost func, forum', err)
         }
+        getPosts();
         getForums();
     }
     
@@ -62,6 +84,7 @@ const Forum = (props) => {
         } catch(err){
             console.log('err on deletepost func in forum', err)
         }
+        getPosts();
         getForums();
     }
     
@@ -77,8 +100,10 @@ const Forum = (props) => {
     const inputs = inputArr.map((input, index) => {
         return <input key={`${input.name}-${input.value}-${index}`} name={input.name} placeholder={input.placeholder} value={input.value} onChange={e => handleChange(e)} />
     })
-    const mappedForum = props.forumPosts.map((elem, index) => {
+    const mappedForum = forum.map((elem, index) => {
         return <ul key={`${elem.id}-${index}`} style={{listStyle: 'none'}}>
+            <li><h5>{elem.username}</h5></li>
+            <li><img src={elem.profile_pic} alt='profile' style={{width: '100px', height: '100px', borderRadius: '50%'}}/></li>
             <li><h4>{elem.title}</h4></li>
             <li><img src={elem.img} alt='forum post' style={{width: '200px'}}/></li>
             <li><p>{elem.content}</p></li>
@@ -123,7 +148,7 @@ const Forum = (props) => {
             <div>
             {mappedForum}
             </div>
-            
+            <Email />
         </div>
     )
 }

@@ -78,7 +78,7 @@ export function addNewShow (title, img, content, id){
 }
 
 export function deleteShow (id){
-    const shows = axios.delete(`/api/shows/${id}`).then(res => console.log(res.data)).catch(err => console.log('err on deleteshow func, reducer', err))
+    const shows = axios.delete(`/api/shows/${id}`).then(res => res.data).catch(err => console.log('err on deleteshow func, reducer', err))
     return {
         type: DELETE_SHOW,
         payload: shows

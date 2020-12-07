@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
+const nodemailer = require('nodemailer');
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 const authCtrl = require('./controllers/authController');
@@ -36,6 +37,8 @@ app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.post('/api/logout', authCtrl.logout);
 app.put('/api/bands', authCtrl.editUser);
+//nodemailer
+app.post('/api/email', authCtrl.email);
 
 app.get('/api/shows', bandCtrl.getAllShows);
 app.get('/api/show', bandCtrl.findShow);

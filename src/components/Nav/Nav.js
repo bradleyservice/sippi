@@ -40,14 +40,14 @@ const Nav = (props) => {
                 searchBar();
                 setSearch('')
             }}>
-                <ul style={{listStyle: 'none'}}>
-                    <li><h1>sippi</h1></li>
+                <ul className='logo-and-search' style={{listStyle: 'none'}}>
+                    <li className='logo'><h1>sippi</h1></li>
                     <li><input placeholder='search...' value={search} 
                     name='search' onChange={(e) => setSearch(e.target.value)} /></li>
                     <button>search</button>
                 </ul>
             </form>
-            <ul style={{listStyle: 'none'}}>
+            <ul className='nav-links' style={{listStyle: 'none'}}>
                 <li><Link to='/dashboard'>home</Link></li>
                 <li><Link to='/profile'>profile</Link></li>
                 <li><Link to='/forum'>forum</Link></li>

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import BandInfo from '../BandInfo/BandInfo';
 import {updateUser} from '../../redux/reducer';
+import Email from '../Email/Email';
 
 const Profile = (props) => {
 
@@ -13,7 +14,6 @@ const Profile = (props) => {
     const editUser = (img) => {
         try {
             axios.put('/api/bands', {img})
-            // props.updateUser(img) -- was sending an empty image back to the reducer?
         } catch(err){
             console.log('err on editUser func, front end', err)
         }
@@ -52,6 +52,7 @@ const Profile = (props) => {
                 </span>
             </div>
             <BandInfo />
+            <Email />
         </div>
     )
 }
