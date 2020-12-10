@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAGA,AASI,MATE,CASF,YAAY,CAAC;EACT,OAAO,EAAE,IAAI;EAEb,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,CAAC;CACT;;AAdL,AAgBI,MAhBE,CAgBF,YAAY,CAAC;EACT,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,QAAQ;CAC5B",
     "sources": [
         "Dashboard.scss"
     ],

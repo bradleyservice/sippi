@@ -49,7 +49,6 @@ module.exports = {
         const {band_pic, band_name, band_description, band_genre} = req.body;
         try {
             let bandInfo = await db.add_band_info([band_pic, band_name, band_description, band_genre, id]);
-            console.log(bandInfo)
             res.status(200).send(bandInfo)
         } catch(err){
             console.log('err on addbandinfo func, serverside', err)

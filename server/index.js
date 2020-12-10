@@ -11,6 +11,9 @@ const forumCtrl = require('./controllers/forumController');
 
 const app = express();
 
+const path = require('path')
+
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 app.use(session({
     resave: false,
@@ -40,6 +43,7 @@ app.put('/api/bands', authCtrl.editUser);
 //nodemailer
 app.post('/api/email', authCtrl.email);
 
+
 app.get('/api/shows', bandCtrl.getAllShows);
 app.get('/api/show', bandCtrl.findShow);
 app.get('/api/shows/:showid', bandCtrl.getOneShow);
@@ -54,5 +58,8 @@ app.post('/api/forums', forumCtrl.addPost);
 app.put('/api/forums/:id', forumCtrl.editPost);
 app.delete('/api/forums/:id', forumCtrl.deletePost);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+  })
 
 app.listen(SERVER_PORT, () => console.log(`server is on port ${SERVER_PORT}`));

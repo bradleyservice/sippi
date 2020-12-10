@@ -4,11 +4,13 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {logoutUser, getUser} from '../../redux/reducer';
 import {withRouter, useHistory} from 'react-router-dom';
+import './Nav.scss';
 
 
 const Nav = (props) => {
 
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
+    const [menu, setMenu] = useState(false);
 
     const history = useHistory();
 
@@ -34,28 +36,35 @@ const Nav = (props) => {
     }
 
     return (
-        <header>
+        <header className='nav-bar'>
             <form onSubmit={e => {
                 e.preventDefault();
                 searchBar();
                 setSearch('')
             }}>
-                <ul className='logo-and-search' style={{listStyle: 'none'}}>
-                    <li className='logo'><h1>sippi</h1></li>
-                    <li><input placeholder='search...' value={search} 
-                    name='search' onChange={(e) => setSearch(e.target.value)} /></li>
-                    <button>search</button>
-                </ul>
+                <div className='logo-and-search' style={{listStyle: 'none'}}>
+                    <div className='logo'><h1>sippi</h1></div>
+                    <div className='input-search'><input className='search-bar' placeholder='search...' value={search} 
+                    name='search' onChange={(e) => setSearch(e.target.value)} />
+                    <button className='nav-button'>search</button></div>
+                </div>
             </form>
-            <ul className='nav-links' style={{listStyle: 'none'}}>
-                <li><Link to='/dashboard'>home</Link></li>
-                <li><Link to='/profile'>profile</Link></li>
-                <li><Link to='/forum'>forum</Link></li>
-                <li><Link to='/addshow'>add a show</Link></li>
-            </ul>
-            {props.isLoggedIn ?
-            <button onClick={logout}>logout</button>
-            : null}
+            <div className='dropdown'>
+                <button className='dropbtn'>menu &nbsp;&nbsp; {<i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i>}</button>
+                <ul className='nav-links' style={{listStyle: 'none'}}>
+                    <li className='link'><Link to='/dashboard'>home</Link></li>
+                    <li className='link'><Link to='/profile'>profile</Link></li>
+                    <li className='link'><Link to='/forum'>forum</Link></li>
+                    <li className='link'><Link to='/addshow'>add a show</Link></li>
+                    {/* <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i> */}
+                </ul>
+            </div>
+            {/* // <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x" style={{marginLeft: '317px', border: '2px solid #fca311', color: '#fca311'}}></i>} */}
+            <div>
+                {props.isLoggedIn ?
+                <button className='logout-nav-button' onClick={logout}>logout</button>
+                : null}
+            </div>
         </header>
     )
 }

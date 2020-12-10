@@ -71,6 +71,7 @@ module.exports = {
         }
     },
     email: async (req, res) => {
+        // nodemailer backend function/layout
         const {name, message, email, title, image} = req.body;
         try {
             let transporter = nodemailer.createTransport({
@@ -101,7 +102,7 @@ module.exports = {
                 if(err){
                     console.log('err', err)
                 } else {
-                    console.log('res', res)
+                    // console.log('res', res)
                     res.status(200).send(info)
                 }
             })

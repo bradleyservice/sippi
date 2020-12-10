@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getShows, deleteShow} from '../../redux/reducer';
 import Nav from '../Nav/Nav';
 import Email from '../Email/Email';
+import './Dashboard.scss';
 
 const Dashboard = (props) => {
 
@@ -13,6 +14,7 @@ const Dashboard = (props) => {
         content:''
     })
     const [shows, setShows] = useState([])
+    const [searchResult, setSearchResult] = useState(false);
 
     const {title, img, content} = search;
     const {getShows} = props;
@@ -40,6 +42,7 @@ const Dashboard = (props) => {
                 img: res.data[0].img,
                 content: res.data[0].content
             }))
+            setSearchResult(true)
         } catch(err){
             console.log('err on searchshow nav comp', err)
         }
@@ -60,31 +63,45 @@ const Dashboard = (props) => {
     return (
         <div>
             <header><Nav searchShow={searchShow}/></header>
+            {searchResult ?
             <div style={{border: '2px solid black', width: '75vw', margin: '0 auto'}}>
                 {title} <br/>
                 {img === '' ?
                 null
-                : <img src={img} alt='show' style={{width: '100px'}} /> } <p>{content}</p>
+                : <img src={img} alt='show' style={{width: '100px'}} /> } 
+                <p>{content}</p>
             </div>
+            : null}
             {shows.map((show, index) => {
-                return <ul key={`${show.id}-${index}`} style={{listStyle: 'none',
+                return <ul className='shows' key={`${show.id}-${index}`} style={{listStyle: 'none',
                 border: '3px solid black',
                 width: '75vw',
                 margin: '0 auto',
                 marginTop: '10px',
                 marginBottom: '10px',
-                display: 'flex',
-                justifyContent: 'center', alignContent: 'center'}} >
-                    <li><h5>{show.username}</h5></li>
-                    <li><img src={show.profile_pic} style={{width: '100px', height: '100px', borderRadius: '50%'}} alt='profile' /></li>
-                    <li><h4>{show.title}</h4></li>
-                    <li><img src={show.img} style={{width: "200px"}} alt='show' /></li>
-                    <li>{show.content}</li>
-                    {props.user.id === show.band_id ?
-                                <button onClick={() => {
+                display: 'flex', justifyContent: 'space-between'}} >
+                    <div>
+                        <img src={show.profile_pic} className='profile-pic' style={{width: '100px', height: '100px', borderRadius: '50%', marginTop: '10px'}} alt='profile' />
+                        <h5 className='username'>{show.username}</h5>
+                    </div>
+                    <div style={{width: '40vw'}}>
+                        <h4 className='show-title'>{show.title}</h4><br/>
+                        <p className='content'>{show.content}</p>
+                        <div>
+                            {props.user.id === show.band_id ?
+                                <button style={{marginTop: '40px'}} onClick={() => {
                                     deleteShow(show.id)
                                 }}>Delete This Show</button>
                                 : null}
+                        </div>
+                    </div>
+                    <div className='dropdown-img'>
+                        <img src={show.img} style={{width: "10vw"}} className='show-poster' alt='show' />
+                        <div className='dropdown-img-content'>
+                            <img src={show.img} style={{width: '20vw'}} alt='show' />
+                        </div>
+                    </div>
+                    
                 </ul>
             })}
             <Email />

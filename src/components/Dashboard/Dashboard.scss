@@ -1,0 +1,19 @@
+
+.dropdown-img {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-img-content {
+    display: none;
+    position: absolute;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    top: 0;
+}
+
+.dropdown-img:hover .dropdown-img-content {
+    display: block;
+}

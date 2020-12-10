@@ -1,0 +1,127 @@
+$primarycolor: #1b2c4e;
+$secondarycolor: #fca311;
+
+@mixin navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@mixin nav-buttons {
+    border: 2px solid $secondarycolor;
+    background-color: $primarycolor;
+    color: white;
+    font-size: 16px;
+}
+
+.nav-button {
+    @include nav-buttons;
+}
+
+.search-bar {
+    font-size: 16px;
+    width: 15vw;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.nav-bar {
+    @include navbar;
+    background: $primarycolor;
+    height: 13.9vh;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+.dropbtn {
+    border: 2px solid $secondarycolor;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    background-color: $primarycolor;
+    height: 24px;
+}
+
+.nav-links {
+    display: none;
+    position: absolute;
+    background-color: rgb(182, 182, 182);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.navlinks a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .nav-links {
+    display: block;
+}
+
+
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: rgba(160, 160, 160, 0.973);
+}
+a:active {
+    text-decoration: underline;
+    color: rgba(160, 160, 160, 0.973);
+}
+
+.link {
+    // margin: 10px;
+    color: white;
+}
+
+.logo-and-search {
+    @include navbar;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 45vw;
+}
+
+.input-search {
+    width: 20vw;
+    display: flex;
+}
+
+.logo {
+    color: white;
+    font-size: 50px;
+    margin-right: 30px;
+    width: 10vw;
+    justify-content: flex-start;
+}
+
+.logout-nav-button {
+    @include nav-buttons;
+    margin-right: 25px;
+    color: white;
+}
+
+

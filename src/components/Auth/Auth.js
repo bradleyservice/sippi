@@ -55,30 +55,34 @@ class Auth extends Component {
     render(){
         const {email, username, password} = this.state;
         return (
-            <div className='auth'>
-                <h1 className='auth-brand'>sippi</h1>
-                {this.state.newUser ?
-                <div className='auth-box'>
-                    <h2>Register</h2>
-                    <form onSubmit={e => this.register(e)} className='form-box'>
-                        <input name='email' value={email} placeholder='Email' onChange={(e) => this.changeHandler(e)} /> <br/>
-                        <input name='username' value={username} placeholder='Username' onChange={(e) => this.changeHandler(e)} /> <br/>
-                        <input name='password' value={password} placeholder='Password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
-                        <button>Submit</button>
-                    </form>
-                    <button onClick={this.toggleNewUser}>Already a user?</button>
+            <div className='container'>
+                <div>
+                    <p className='auth-brand'>sippi</p>
                 </div>
-                :
-                <div className='auth-box'>
-                    <h2>Login</h2>
-                    <form onSubmit={e => this.login(e)} className='form-box'>
-                        <input name='email' value={email} placeholder='Email' onChange={(e) => this.changeHandler(e)} /> <br/>
-                        <input name='password' value={password} placeholder='Password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
-                        <button>Submit</button>
-                    </form>
-                    <button onClick={this.toggleNewUser}>Need an account?</button>
+                <div className='auth'>
+                    {this.state.newUser ?
+                    <div className='auth-box'>
+                        <h2>register</h2>
+                        <form onSubmit={e => this.register(e)} className='form-box'>
+                            <input name='email' value={email} placeholder='email' onChange={(e) => this.changeHandler(e)} /> <br/>
+                            <input name='username' value={username} placeholder='username' onChange={(e) => this.changeHandler(e)} /> <br/>
+                            <input name='password' value={password} placeholder='password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
+                            <button>submit</button>
+                        <button onClick={this.toggleNewUser}>already a user?</button>
+                        </form>
+                    </div>
+                    :
+                    <div className='auth-box'>
+                        <h2>login</h2>
+                        <form onSubmit={e => this.login(e)} className='form-box'>
+                            <input name='email' value={email} placeholder='email' onChange={(e) => this.changeHandler(e)} /> <br/>
+                            <input name='password' value={password} placeholder='password' type='password' onChange={(e) => this.changeHandler(e)} /> <br/>
+                            <button>submit</button>
+                        <button onClick={this.toggleNewUser}>need an account?</button>
+                        </form>
+                    </div>
+                    }
                 </div>
-                }
             </div>
         )
     }

@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
-import axios from 'axios';
-import BandInfo from '../BandInfo/BandInfo';
 import {updateUser} from '../../redux/reducer';
+import axios from 'axios';
+import Nav from '../Nav/Nav';
+import BandInfo from '../BandInfo/BandInfo';
 import Email from '../Email/Email';
 
 const Profile = (props) => {

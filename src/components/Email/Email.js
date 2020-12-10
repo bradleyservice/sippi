@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {Component} from 'react';
 
+
 class Email extends Component {
     constructor(){
         super();
@@ -25,38 +26,47 @@ class Email extends Component {
 
     handleSend = () => {
         const {name, email, title, message, image} = this.state;
-        axios.post('/api/email', {name, email, title, message, image}).then(res => {
-            this.setState({
-                name: '',
-                email: '',
-                title: '',
-                message: '',
-                image: '',
-                toggle: false
+        try {
+        axios.post('/api/email', {name, email, title, message, image})
+        this.setState({
+            name: '',
+            email: '',
+            title: '',
+            message: '',
+            image: '',
+            toggle: false
             })
-        })
+        } catch(err){
+            console.log('err in handlesend', err)
+        }
     }
 
     render(){
         const {name, email, title, message, image, toggle} = this.state;
         return(
-            <div style={styles.body}>
-                {toggle ?
-                <form style={styles.form}>
-                    <h1 style={styles.header}>email us</h1>
-                    <input style={styles.input} name='name' placeholder='Your Name' value={name} onChange={this.handleInput} />
-                    <input style={styles.input} name='email' placeholder='Your Email' value={email} onChange={this.handleInput} />
-                    <input style={styles.input} name='title' placeholder='Subject' value={title} onChange={this.handleInput} />
-                    <input style={styles.input} name='message' placeholder='Email Body' value={message} onChange={this.handleInput} />
-                    <input style={styles.input} name='image' placeholder='Image' value={image} onChange={this.handleInput} />
-                    <button style={styles.button} onClick={this.handleSend}>send</button>
-                    <i className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
-                </form>
-                : 
-                <div>
-                    <h5>click here to email us:</h5>
-                    <i className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
-                </div>}
+            <div>
+                <footer>
+                    {toggle ?
+                    <div style={styles.body}>
+                        <form style={styles.form}>
+                            <h1 style={styles.header}>email us</h1>
+                            <input style={styles.input} name='name' placeholder='your name' value={name} onChange={this.handleInput} />
+                            <input style={styles.input} name='email' placeholder='your email' value={email} onChange={this.handleInput} />
+                            <input style={styles.input} name='title' placeholder='subject' value={title} onChange={this.handleInput} />
+                            <input style={styles.input} name='message' placeholder='email body' value={message} onChange={this.handleInput} />
+                            <input style={styles.input} name='image' placeholder='image' value={image} onChange={this.handleInput} />
+                            <div style={{display: 'inline', alignItems: 'center', width: '160px', marginBottom: '10px'}}>
+                                <button style={styles.button} onClick={this.handleSend}>send</button>
+                                <i style={styles.logo} className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
+                            </div>
+                        </form>
+                    </div>
+                    : 
+                    <div style={styling.body} className='email-us'>
+                        <h5>click here to email us: &nbsp;&nbsp;&nbsp;&nbsp;</h5>
+                        <i className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
+                    </div>}
+                </footer>
             </div>
         )
     }
@@ -71,24 +81,22 @@ const styles = {
       display:'flex',
       alignItems:'center',
       justifyContent:'center',
-      marginTop:75
+      marginTop:75,
     },
     form:{
       display:'flex',
       flexDirection:'column',
-      background:'#3973A8',
-      width:'90vw',
+      background:'#1b2c4e',
+      width:'80vw',
       alignItems:'center',
       height:'27vh',
       justifyContent:'space-evenly',
-      borderRadius:10
+      borderRadius:7
     },
     header:{
-      fontSize:24,
+      fontSize:20,
       margin:0,
       color:'white',
-      letterSpacing:'0.07em',
-      fontWeight:'bold'
     },
     input:{
       width:300,
@@ -99,11 +107,26 @@ const styles = {
     button:{
       width:100,
       height:26,
-      borderRadius:10,
-      background:'black',
+      border:'2px solid #fca311',
+      background:'#1b2c4e',
       color: 'white',
-      fontSize:18,
-      fontWeight:'bold',
-      letterSpacing:'0.07em'
+      fontSize:20,
+      marginTop: '7px'
+    },
+    logo:{
+        color: 'white',
+        marginTop: '7px',
+        marginLeft: '10px'
     }
+  }
+
+  const styling = {
+      body:{
+        background:'lightgrey',
+        height:'16vh',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop:75
+      }
   }

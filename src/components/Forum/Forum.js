@@ -101,34 +101,46 @@ const Forum = (props) => {
         return <input key={`${input.name}-${input.value}-${index}`} name={input.name} placeholder={input.placeholder} value={input.value} onChange={e => handleChange(e)} />
     })
     const mappedForum = forum.map((elem, index) => {
-        return <ul key={`${elem.id}-${index}`} style={{listStyle: 'none'}}>
-            <li><h5>{elem.username}</h5></li>
-            <li><img src={elem.profile_pic} alt='profile' style={{width: '100px', height: '100px', borderRadius: '50%'}}/></li>
-            <li><h4>{elem.title}</h4></li>
-            <li><img src={elem.img} alt='forum post' style={{width: '200px'}}/></li>
-            <li><p>{elem.content}</p></li>
-            {edit && props.user.id === elem.band_id ?
-            <form><div>
-                {inputs}
-                <button onClick={() => {
-                    setPost(post)
-                    setEdit(!edit)
-                }}>Cancel</button>
-                <button onClick={() => {
-                    editPost(elem.id)
-                    setEdit(!edit)
-                }}>Save</button>
-                </div></form>
-            : props.user.id === elem.band_id ?
+        return <ul key={`${elem.id}-${index}`} style={{listStyle: 'none',
+                border: '3px solid black',
+                width: '75vw',
+                margin: '0 auto',
+                marginTop: '10px',
+                marginBottom: '10px',
+                display: 'flex', justifyContent: 'space-between'}}>
             <div>
-                <button onClick={() => {
-                    setEdit(!edit)
-                }}>edit post</button>
-                <button onClick={() => {
-                    deletePost(elem.id)
-                }}>delete post</button>
+                <img src={elem.profile_pic} alt='profile' style={{width: '100px', height: '100px', borderRadius: '50%', marginTop: '10px'}}/>
+                <h5>{elem.username}</h5>
             </div>
-            : null}
+            <div>
+                <h4>{elem.title}</h4>
+                <p>{elem.content}</p>
+                {edit && props.user.id === elem.band_id ?
+                <form><div>
+                    {inputs}
+                    <button onClick={() => {
+                        setPost(post)
+                        setEdit(!edit)
+                    }}>Cancel</button>
+                    <button onClick={() => {
+                        editPost(elem.id)
+                        setEdit(!edit)
+                    }}>Save</button>
+                    </div></form>
+                : props.user.id === elem.band_id ?
+                <div>
+                    <button onClick={() => {
+                        setEdit(!edit)
+                    }}>edit post</button>
+                    <button onClick={() => {
+                        deletePost(elem.id)
+                    }}>delete post</button>
+                </div>
+                : null}
+            </div>
+            <div>
+                <img src={elem.img} alt='forum post' style={{width: '200px'}}/>
+            </div>
         </ul>
     })
 

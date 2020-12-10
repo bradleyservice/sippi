@@ -1,1 +1,47 @@
-/* No CSS *//*# sourceMappingURL=Nav.css.map */
+.nav-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #3973A7;
+  height: 109px;
+}
+
+.nav-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.link {
+  margin: 8px;
+}
+
+.logo-and-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.logo {
+  color: white;
+  font-size: 50px;
+  bottom: 0;
+  margin-right: 20px;
+}
+
+.logout {
+  margin-right: 15px;
+}
+/*# sourceMappingURL=Nav.css.map */
