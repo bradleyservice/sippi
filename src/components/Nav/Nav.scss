@@ -30,7 +30,8 @@ $secondarycolor: #fca311;
 .nav-bar {
     @include navbar;
     background: $primarycolor;
-    height: 13.9vh;
+    height: 13.5vh;
+    margin-bottom: 75px;
 }
 
 .dropdown {
@@ -103,6 +104,12 @@ a:active {
     display: flex;
     justify-content: space-between;
     width: 45vw;
+}
+
+.right-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 25vw;
 }
 
 .input-search {

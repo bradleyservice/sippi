@@ -77,9 +77,9 @@ const Dashboard = (props) => {
                 border: '3px solid black',
                 width: '75vw',
                 margin: '0 auto',
-                marginTop: '10px',
-                marginBottom: '10px',
-                display: 'flex', justifyContent: 'space-between'}} >
+                marginTop: '15px',
+                marginBottom: '15px',
+                display: 'flex', justifyContent: 'space-between', backgroundColor: '#e2e2e2'}} >
                     <div>
                         <img src={show.profile_pic} className='profile-pic' style={{width: '100px', height: '100px', borderRadius: '50%', marginTop: '10px'}} alt='profile' />
                         <h5 className='username'>{show.username}</h5>
@@ -96,9 +96,9 @@ const Dashboard = (props) => {
                         </div>
                     </div>
                     <div className='dropdown-img'>
-                        <img src={show.img} style={{width: "10vw"}} className='show-poster' alt='show' />
+                        <img src={show.img} style={{width: "15vw"}} className='show-poster' alt='show' />
                         <div className='dropdown-img-content'>
-                            <img src={show.img} style={{width: '20vw'}} alt='show' />
+                            <img src={show.img} style={{width: '30vw'}} alt='show' />
                         </div>
                     </div>
                     

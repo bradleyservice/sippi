@@ -1,0 +1,15 @@
+.profile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 45vw;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 20vw;
+    margin: 10px;
+}

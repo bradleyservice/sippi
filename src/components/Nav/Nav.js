@@ -37,33 +37,37 @@ const Nav = (props) => {
 
     return (
         <header className='nav-bar'>
-            <form onSubmit={e => {
-                e.preventDefault();
-                searchBar();
-                setSearch('')
-            }}>
-                <div className='logo-and-search' style={{listStyle: 'none'}}>
-                    <div className='logo'><h1>sippi</h1></div>
-                    <div className='input-search'><input className='search-bar' placeholder='search...' value={search} 
-                    name='search' onChange={(e) => setSearch(e.target.value)} />
-                    <button className='nav-button'>search</button></div>
-                </div>
-            </form>
-            <div className='dropdown'>
-                <button className='dropbtn'>menu &nbsp;&nbsp; {<i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i>}</button>
-                <ul className='nav-links' style={{listStyle: 'none'}}>
-                    <li className='link'><Link to='/dashboard'>home</Link></li>
-                    <li className='link'><Link to='/profile'>profile</Link></li>
-                    <li className='link'><Link to='/forum'>forum</Link></li>
-                    <li className='link'><Link to='/addshow'>add a show</Link></li>
-                    {/* <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i> */}
-                </ul>
-            </div>
-            {/* // <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x" style={{marginLeft: '317px', border: '2px solid #fca311', color: '#fca311'}}></i>} */}
             <div>
-                {props.isLoggedIn ?
-                <button className='logout-nav-button' onClick={logout}>logout</button>
-                : null}
+                <form onSubmit={e => {
+                    e.preventDefault();
+                    searchBar();
+                    setSearch('')
+                }}>
+                    <div className='logo-and-search' style={{listStyle: 'none'}}>
+                        <div className='logo'><h1>sippi</h1></div>
+                        <div className='input-search'><input className='search-bar' placeholder='search...' value={search} 
+                        name='search' onChange={(e) => setSearch(e.target.value)} />
+                        <button className='nav-button'>search</button></div>
+                    </div>
+                </form>
+            </div>
+            <div className='right-nav'>
+                <div className='dropdown'>
+                    <button className='dropbtn'>menu &nbsp;&nbsp; {<i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i>}</button>
+                    <ul className='nav-links' style={{listStyle: 'none'}}>
+                        <li className='link'><Link to='/dashboard'>home</Link></li>
+                        <li className='link'><Link to='/profile'>profile</Link></li>
+                        <li className='link'><Link to='/forum'>forum</Link></li>
+                        <li className='link'><Link to='/addshow'>add a show</Link></li>
+                        {/* <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x"></i> */}
+                    </ul>
+                </div>
+                {/* // <i onClick={() => setMenu(!menu)} className="fas fa-caret-down fa-2x" style={{marginLeft: '317px', border: '2px solid #fca311', color: '#fca311'}}></i>} */}
+                <div>
+                    {props.isLoggedIn ?
+                    <button className='logout-nav-button' onClick={logout}>logout</button>
+                    : null}
+                </div>
             </div>
         </header>
     )

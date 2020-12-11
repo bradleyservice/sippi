@@ -5,15 +5,17 @@ import axios from 'axios';
 import Nav from '../Nav/Nav';
 import BandInfo from '../BandInfo/BandInfo';
 import Email from '../Email/Email';
+import './Profile.scss';
 
 const Profile = (props) => {
 
     const [edit, setEdit] = useState(false)
-    const [input, setInput] = useState('')
+    const [profilePicInput, setProfilePicInput] = useState(props.user.profile_pic)
+    const [usernameInput, setUsernameInput] = useState(props.user.username)
 
-    const editUser = (img) => {
+    const editUser = (img, username) => {
         try {
-            axios.put('/api/bands', {img})
+            axios.put('/api/bands', {img, username})
         } catch(err){
             console.log('err on editUser func, front end', err)
         }
@@ -22,36 +24,48 @@ const Profile = (props) => {
     return (
         <div>
             <header><Nav /></header>
-            <div>
+            <div className='profile'>
+                <div>
                 {props.user.profile_pic === null ? 
                 <i className="far fa-image fa-10x"></i>
                 : <img src={props.user.profile_pic} style={{width: '200px', height: '200px', borderRadius: '50%'}} alt='profile' />}
-                {edit ?
-                    <input
-                    value={input}
-                    onChange={e => setInput(e.target.value)} />
-                : null}
-                {edit ? <div>
-                    <button onClick={() => {
-                        setInput('')
-                        setEdit(!edit)
-                    }}>Cancel</button>
-                    <button onClick={() => {
-                        editUser(input)
-                        setEdit(!edit)
-                    }}>Save</button>
                 </div>
-                : 
-                <button onClick={() => {
-                    setEdit(!edit)
-                }}>Edit Profile Picture</button>}
+                <div className='user-info'>
+                    welcome, {props.user.username}
+                    {edit ?
+                    <div>
+                        <input
+                        value={profilePicInput}
+                        placeholder='profile picture url'
+                        onChange={e => setProfilePicInput(e.target.value)} />
+                        <input
+                        value={usernameInput}
+                        placeholder='new username'
+                        onChange={e => setUsernameInput(e.target.value)} />
+                    </div>
+                    : null}
+                    {edit ? <div>
+                        <button onClick={() => {
+                            setProfilePicInput(props.user.profile_pic)
+                            setUsernameInput(props.user.username)
+                            setEdit(!edit)
+                        }}>cancel</button>
+                        <button onClick={() => {
+                            editUser(profilePicInput, usernameInput)
+                            setProfilePicInput(profilePicInput)
+                            setUsernameInput(usernameInput)
+                            setEdit(!edit)
+                        }}>save</button>
+                    </div>
+                    : 
+                    <button onClick={() => {
+                        setEdit(!edit)
+                    }}>edit username & picture</button>}
+                </div>
             </div>
-            <div>
-                <span>
-                    hello, {props.user.username}
-                </span>
+            <div className='band-info'>
+                <BandInfo />
             </div>
-            <BandInfo />
             <Email />
         </div>
     )

@@ -138,8 +138,11 @@ const Forum = (props) => {
                 </div>
                 : null}
             </div>
-            <div>
-                <img src={elem.img} alt='forum post' style={{width: '200px'}}/>
+            <div className='dropdown-img'>
+                <img src={elem.img} style={{width: "15vw"}} className='show-poster' alt='post' />
+                <div className='dropdown-img-content'>
+                    <img src={elem.img} style={{width: '30vw'}} alt='post' />
+                </div>
             </div>
         </ul>
     })

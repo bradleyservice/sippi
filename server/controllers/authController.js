@@ -60,10 +60,10 @@ module.exports = {
         //want the user to be able to update their profile picture once they log in
         //and not worry about it during the register phase
         const db = req.app.get('db');
-        const {img} = req.body;
+        const {img, username} = req.body;
         const {id} = req.session.user;
         try {
-            const [updatedUser] = await db.edit_user([id, img])
+            const [updatedUser] = await db.edit_user([id, img, username])
             req.session.user = updatedUser;
             res.status(200).send(req.session.user)
         } catch(err){
@@ -83,6 +83,7 @@ module.exports = {
             });
             let info = await transporter.sendMail({
                 from: `'${name}' <${email}>`,
+                replyTo: `${email}`,
                 to: EMAIL,
                 subject: title,
                 text: message,
