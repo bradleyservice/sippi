@@ -56,7 +56,7 @@ class Email extends Component {
                             <input style={styles.input} name='message' placeholder='email body' value={message} onChange={this.handleInput} />
                             <input style={styles.input} name='image' placeholder='image' value={image} onChange={this.handleInput} />
                             <div style={{display: 'inline', alignItems: 'center', width: '160px', marginBottom: '10px'}}>
-                                <button style={styles.button} onClick={this.handleSend}>send &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                <button type='submit' style={styles.button} onClick={this.handleSend}>send &nbsp;&nbsp;&nbsp;&nbsp;</button>
                                 <i style={styles.logo} className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
                             </div>
                         </form>
