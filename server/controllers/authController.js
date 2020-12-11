@@ -75,7 +75,9 @@ module.exports = {
         const {name, message, email, title, image} = req.body;
         try {
             let transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
                 auth: {
                     user: EMAIL,
                     pass: PASSWORD
@@ -103,7 +105,7 @@ module.exports = {
                 if(err){
                     console.log('err', err)
                 } else {
-                    // console.log('res', res)
+                    console.log('res', res)
                     res.status(200).send(info)
                 }
             })
