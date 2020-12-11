@@ -48,7 +48,7 @@ class Email extends Component {
                 <footer>
                     {toggle ?
                     <div style={styles.body}>
-                        <form style={styles.form}>
+                        <form style={styles.form} onSubmit={this.handleSend}>
                             <h1 style={styles.header}>email us</h1>
                             <input style={styles.input} name='name' placeholder='your name' value={name} onChange={this.handleInput} />
                             <input style={styles.input} name='email' placeholder='your email' value={email} onChange={this.handleInput} />
