@@ -24,7 +24,8 @@ class Email extends Component {
         this.setState({toggle: !this.state.toggle})
     }
 
-    handleSend = () => {
+    handleSend = (e) => {
+        e.preventDefault();
         const {name, email, title, message, image} = this.state;
         try {
         axios.post('/api/email', {name, email, title, message, image})
@@ -56,7 +57,7 @@ class Email extends Component {
                             <input style={styles.input} name='message' placeholder='email body' value={message} onChange={this.handleInput} />
                             <input style={styles.input} name='image' placeholder='image' value={image} onChange={this.handleInput} />
                             <div style={{display: 'inline', alignItems: 'center', width: '160px', marginBottom: '10px'}}>
-                                <button type='submit' style={styles.button} onClick={this.handleSend}>send &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                <button type='submit' style={styles.button}>send &nbsp;&nbsp;&nbsp;&nbsp;</button>
                                 <i style={styles.logo} className="fas fa-bars fa-2x" onClick={this.handleToggle}></i>
                             </div>
                         </form>
@@ -82,6 +83,7 @@ const styles = {
       alignItems:'center',
       justifyContent:'center',
       marginTop:'75px',
+      width: '100vw'
     },
     form:{
       display:'flex',
@@ -99,7 +101,7 @@ const styles = {
       color:'white',
     },
     input:{
-      width:300,
+      width:250,
       height:18,
       fontSize:14,
       outline:'none'
@@ -127,6 +129,7 @@ const styles = {
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-        marginTop:75
+        marginTop:75,
+        width: '100vw'
       }
   }

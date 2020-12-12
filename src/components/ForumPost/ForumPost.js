@@ -39,10 +39,10 @@ const ForumPost = (props) => {
 
     return (
         <div>
-            <form onSubmit={e => handleSubmit(e)}>
-                <input name='title' placeholder='Post Title' value={title} onChange={e => handleChange(e)}/>
+            <form onSubmit={e => handleSubmit(e)} style={{marginTop: '15px'}}>
+                <input style={{margin: '7px'}} name='title' placeholder='Post Title' value={title} onChange={e => handleChange(e)}/>
                 <input name='img' placeholder='Image URL' value={img} onChange={e => handleChange(e)}/>
-                <input name='content' placeholder='Content' value={content} onChange={e => handleChange(e)}/>
+                <input style={{margin: '7px'}} name='content' placeholder='Content' value={content} onChange={e => handleChange(e)}/>
                 <button type='submit' >submit</button>
             </form>
         </div>

@@ -25,6 +25,8 @@ const Forum = (props) => {
     
     const [edit, setEdit] = useState(false);
 
+    const [searchResult, setSearchResult] = useState(false)
+
     const {getForums} = props;
     const {title, img, content} = post;
     const {newTitle, newImg, newContent} = newPost;
@@ -72,6 +74,7 @@ const Forum = (props) => {
                 newImg: res.data[0].img,
                 newContent: res.data[0].content
             }))
+            setSearchResult(true)
         } catch(err){
             console.log('err on searchforum func frontside', err)
         }
@@ -101,19 +104,18 @@ const Forum = (props) => {
         return <input key={`${input.name}-${input.value}-${index}`} name={input.name} placeholder={input.placeholder} value={input.value} onChange={e => handleChange(e)} />
     })
     const mappedForum = forum.map((elem, index) => {
-        return <ul key={`${elem.id}-${index}`} style={{listStyle: 'none',
+        return <ul key={`${elem.id}-${index}`} className='shows' style={{listStyle: 'none',
                 border: '3px solid black',
-                width: '75vw',
                 margin: '0 auto',
                 marginTop: '10px',
                 marginBottom: '10px',
                 display: 'flex', justifyContent: 'space-between'}}>
             <div>
-                <img src={elem.profile_pic} alt='profile' style={{width: '100px', height: '100px', borderRadius: '50%', marginTop: '10px'}}/>
-                <h5>{elem.username}</h5>
+                <img src={elem.profile_pic} alt='profile' className='profile-pic'/>
+                <h6>{elem.username}</h6>
             </div>
             <div>
-                <h4>{elem.title}</h4>
+                <h5>{elem.title}</h5>
                 <p>{elem.content}</p>
                 {edit && props.user.id === elem.band_id ?
                 <form><div>
@@ -139,9 +141,9 @@ const Forum = (props) => {
                 : null}
             </div>
             <div className='dropdown-img'>
-                <img src={elem.img} style={{width: "15vw"}} className='show-poster' alt='post' />
+                <img src={elem.img} className='show-poster' alt='post' />
                 <div className='dropdown-img-content'>
-                    <img src={elem.img} style={{width: '30vw'}} alt='post' />
+                    <img src={elem.img} alt='post' />
                 </div>
             </div>
         </ul>
@@ -152,11 +154,15 @@ const Forum = (props) => {
             <div>
                 <Nav searchForum={searchForum} />
             </div>
+            {searchResult ? 
             <div style={{border: '2px solid black', width: '75vw', margin: '0 auto'}}>
                 {newTitle} <br/>
                 {newImg === '' ?
-                null: <img src={newImg} alt='forum' style={{width: '100px'}} />} <p>{newContent}</p>
+                null
+                : <img src={newImg} alt='forum' style={{width: '100px'}} />} 
+                <p>{newContent}</p>
             </div>
+            : null }
             <div>
                 <ForumPost />
             </div>

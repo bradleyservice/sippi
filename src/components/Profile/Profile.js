@@ -23,48 +23,49 @@ const Profile = (props) => {
 
     return (
         <div>
-            <header><Nav /></header>
-            <div className='profile'>
-                <div>
+            <Nav />
+            <div className='profile-comp'>
+                <div className='profile-img'>
                 {props.user.profile_pic === null ? 
                 <i className="far fa-image fa-10x"></i>
-                : <img src={props.user.profile_pic} style={{width: '200px', height: '200px', borderRadius: '50%'}} alt='profile' />}
-                </div>
-                <div className='user-info'>
-                    welcome, {props.user.username}
-                    {edit ?
-                    <div>
-                        <input
-                        value={profilePicInput}
-                        placeholder='profile picture url'
-                        onChange={e => setProfilePicInput(e.target.value)} />
-                        <input
-                        value={usernameInput}
-                        placeholder='new username'
-                        onChange={e => setUsernameInput(e.target.value)} />
-                    </div>
-                    : null}
-                    {edit ? <div>
-                        <button onClick={() => {
-                            setProfilePicInput(props.user.profile_pic)
-                            setUsernameInput(props.user.username)
+                : <img src={props.user.profile_pic} className='user-photo' alt='profile' />}
+                    <div className='user-info'>
+                        welcome, {props.user.username}
+                        {edit ?
+                        <div>
+                            <input style={{marginTop: '10px'}}
+                            value={profilePicInput}
+                            placeholder='profile picture url'
+                            onChange={e => setProfilePicInput(e.target.value)} />
+                            <input
+                            value={usernameInput}
+                            placeholder='new username'
+                            onChange={e => setUsernameInput(e.target.value)} />
+                        </div>
+                        : null}
+                        {edit ? <div>
+                            <button style={{marginTop: '10px'}} onClick={() => {
+                                setProfilePicInput(props.user.profile_pic)
+                                setUsernameInput(props.user.username)
+                                setEdit(!edit)
+                            }}>cancel</button>
+                            <button style={{marginTop: '10px'}} onClick={() => {
+                                editUser(profilePicInput, usernameInput)
+                                setProfilePicInput(profilePicInput)
+                                setUsernameInput(usernameInput)
+                                setEdit(!edit)
+                            }}>save</button>
+                        </div>
+                        : 
+                        <button style={{marginTop: '15px'}}onClick={() => {
                             setEdit(!edit)
-                        }}>cancel</button>
-                        <button onClick={() => {
-                            editUser(profilePicInput, usernameInput)
-                            setProfilePicInput(profilePicInput)
-                            setUsernameInput(usernameInput)
-                            setEdit(!edit)
-                        }}>save</button>
+                        }}>edit username & picture</button>}
                     </div>
-                    : 
-                    <button onClick={() => {
-                        setEdit(!edit)
-                    }}>edit username & picture</button>}
                 </div>
-            </div>
-            <div className='band-info'>
+                <div className='bar'></div>
+                
                 <BandInfo />
+                
             </div>
             <Email />
         </div>

@@ -1,15 +1,96 @@
-.profile {
+@mixin profile-component {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    width: 45vw;
+    // align-items: center;
+}
+
+.profile-comp {
+    @include profile-component();
+}
+
+.band-photo {
+    width: 300px;
+    }
+
+.user-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-img {
+    display: inline-block;
+    justify-content: space-around;
+    min-width: 100px;
+    height: 25vh;
+}
+
+.bar {
+    width: 20px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black; 
+    margin: 10px;
+    // background-image: linear-gradient( #1b2c4e, #fca311);
 }
 
 .user-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 20vw;
-    margin: 10px;
+    height: 15vh;
+}
+
+.band-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    // margin-top: -110px;
+
+    .info {
+        margin: 50px;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .profile-comp {
+        display: inline-block;
+    }
+    
+    .band-photo {
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    .user-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-top: 10px;
+    }
+
+    .user-info {
+        display: flex;
+        width: 50vw;
+        height: 10vh;
+    }
+        
+    .info {
+        font-size: 10px;
+        margin: 30px 10px 0px 10px;
+        min-width: 150px;
+    }
+    
+    .bar {
+        display: none;
+    }
+
+    .band-info-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

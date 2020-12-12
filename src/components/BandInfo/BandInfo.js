@@ -56,13 +56,12 @@ const BandInfo = (props) => {
     }
 
     return (
-        <div>
-            <div style={{backgroundColor: '#eddcdc', width: '80vw', height: '5vh', margin: '0 auto', marginTop: '10px', border: '2px solid black'}}></div>
-            <div>
-                <h2>Band Photo: </h2><img src={band_pic} style={{width: '300px'}} alt='band'/>
-                <h2>Band Name:</h2> <span>{band_name}</span> <br/>
-                <h2>Band Description:</h2> <span>{band_description}</span> <br/>
-                <h2>Band Genre:</h2> <span>{band_genre}</span> <br/>
+        <div className='band-info-page'>
+            <div className='band-info'>
+                <div><h3>Band Photo: </h3><img src={band_pic} className='band-photo' alt='band'/></div>
+                <div className='info'><h3>Band Name:</h3> <h4>{band_name}</h4>
+                <h3>Band Description:</h3> <span>{band_description}</span>
+                <h3>Band Genre:</h3> <span>{band_genre}</span></div>
             </div>
             {edit ? 
             <form onSubmit={e => handleSubmit(e)}>

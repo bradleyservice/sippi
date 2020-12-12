@@ -75,30 +75,29 @@ const Dashboard = (props) => {
             {shows.map((show, index) => {
                 return <ul className='shows' key={`${show.id}-${index}`} style={{listStyle: 'none',
                 border: '3px solid black',
-                width: '75vw',
                 margin: '0 auto',
                 marginTop: '15px',
                 marginBottom: '15px',
-                display: 'flex', justifyContent: 'space-between', backgroundColor: '#e2e2e2'}} >
+                display: 'flex', justifyContent: 'space-between'}} >
                     <div>
-                        <img src={show.profile_pic} className='profile-pic' style={{width: '100px', height: '100px', borderRadius: '50%', marginTop: '10px'}} alt='profile' />
+                        <img src={show.profile_pic} className='profile-pic' alt='profile' />
                         <h5 className='username'>{show.username}</h5>
                     </div>
                     <div style={{width: '40vw'}}>
-                        <h4 className='show-title'>{show.title}</h4><br/>
+                        <h5 className='show-title'>{show.title}</h5>
                         <p className='content'>{show.content}</p>
                         <div>
                             {props.user.id === show.band_id ?
-                                <button style={{marginTop: '40px'}} onClick={() => {
+                                <button onClick={() => {
                                     deleteShow(show.id)
                                 }}>Delete This Show</button>
                                 : null}
                         </div>
                     </div>
                     <div className='dropdown-img'>
-                        <img src={show.img} style={{width: "15vw"}} className='show-poster' alt='show' />
+                        <img src={show.img} className='show-poster' alt='show' />
                         <div className='dropdown-img-content'>
-                            <img src={show.img} style={{width: '30vw'}} alt='show' />
+                            <img src={show.img} alt='show' />
                         </div>
                     </div>
                     

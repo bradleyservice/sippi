@@ -1,6 +1,13 @@
 $primarycolor: #1b2c4e;
 $secondarycolor: #fca311;
 
+@mixin app-buttons-general {
+    background-color: white;
+    border: 2px solid $secondarycolor;
+    font-size: 16px;
+    font-weight: 500;
+}
+
 @mixin navbar {
     display: flex;
     align-items: center;
@@ -13,6 +20,10 @@ $secondarycolor: #fca311;
     background-color: $primarycolor;
     color: white;
     font-size: 16px;
+}
+
+button {
+    @include app-buttons-general();
 }
 
 .nav-button {
@@ -32,24 +43,26 @@ $secondarycolor: #fca311;
     background: $primarycolor;
     height: 13.5vh;
     margin-bottom: 75px;
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+    }
+    
+    .dropbtn {
+        border: 2px solid $secondarycolor;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        background-color: $primarycolor;
+        height: 18px;
+        margin: 6px;
+    }
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin: 0;
-}
-
-.dropbtn {
-    border: 2px solid $secondarycolor;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    background-color: $primarycolor;
-    height: 24px;
-}
 
 .nav-links {
     display: none;
@@ -119,7 +132,8 @@ a:active {
 
 .logo {
     color: white;
-    font-size: 50px;
+    font-size: 100px;
+    font-weight: 800;
     margin-right: 30px;
     width: 10vw;
     justify-content: flex-start;
@@ -131,4 +145,68 @@ a:active {
     color: white;
 }
 
-
+@media screen and (max-width: 850px){
+    .logo {
+        font-size: 50px;
+        /* display: flex;
+        justify-content: flex-start; */
+    }
+    .right-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .search-bar {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 100px;
+    }
+    .logo-and-search {
+        display: flex;
+        align-items: center;
+        margin: auto;
+        min-width: 190px;
+    }
+    .band-info-page {
+        min-width: 200px;
+        // margin-right: 70px;
+    }
+  }
+  
+  @media screen and (max-width: 450px){
+    .nav-bar {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 9vh;
+    }
+    .logo {
+        font-size: 48px;
+        margin: 0;
+    }
+    .right-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .search-bar {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 80px;
+    }
+    .logo-and-search {
+        display: flex;
+        align-items: center;
+        margin: auto;
+       min-width: 190px;
+    }
+    .band-info-page {
+      display: flex;
+      justify-content: center;
+      min-width: 100px;
+    }
+  }
