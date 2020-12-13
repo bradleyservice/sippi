@@ -46,9 +46,9 @@ class AddShow extends Component {
                 <Nav />
                 <div>
                     <form onSubmit={(e) => this.handleSubmit(e)} style={{marginTop: '15px'}}>
-                        <input style={{margin: '7px'}} name='title' placeholder='Show Title' value={title} onChange={e => this.changeHandler(e)} />
-                        <input name='img' placeholder='Show Image' value={img} onChange={e => this.changeHandler(e)} />
-                        <input style={{margin: '7px'}} name='content' placeholder='Show Description' value={content} onChange={e => this.changeHandler(e)} />
+                        <input style={{margin: '7px'}} name='title' placeholder='show title' value={title} onChange={e => this.changeHandler(e)} />
+                        <input name='img' placeholder='show image url' value={img} onChange={e => this.changeHandler(e)} />
+                        <input style={{margin: '7px'}} name='content' placeholder='show description' value={content} onChange={e => this.changeHandler(e)} />
                         <button type='submit'>Submit</button>
                     </form>
                 </div>

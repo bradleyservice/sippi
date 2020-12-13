@@ -75,9 +75,7 @@ module.exports = {
         const {name, message, email, title, image} = req.body;
         try {
             let transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
+                service: 'gmail',
                 auth: {
                     user: EMAIL,
                     pass: PASSWORD

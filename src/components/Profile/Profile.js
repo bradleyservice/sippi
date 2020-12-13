@@ -33,7 +33,7 @@ const Profile = (props) => {
                         welcome, {props.user.username}
                         {edit ?
                         <div>
-                            <input style={{marginTop: '10px'}}
+                            <input style={{marginTop: '8px'}}
                             value={profilePicInput}
                             placeholder='profile picture url'
                             onChange={e => setProfilePicInput(e.target.value)} />
@@ -44,12 +44,12 @@ const Profile = (props) => {
                         </div>
                         : null}
                         {edit ? <div>
-                            <button style={{marginTop: '10px'}} onClick={() => {
+                            <button style={{marginTop: '8px', marginRight: '5px'}} onClick={() => {
                                 setProfilePicInput(props.user.profile_pic)
                                 setUsernameInput(props.user.username)
                                 setEdit(!edit)
                             }}>cancel</button>
-                            <button style={{marginTop: '10px'}} onClick={() => {
+                            <button style={{marginTop: '8px'}} onClick={() => {
                                 editUser(profilePicInput, usernameInput)
                                 setProfilePicInput(profilePicInput)
                                 setUsernameInput(usernameInput)
@@ -57,7 +57,7 @@ const Profile = (props) => {
                             }}>save</button>
                         </div>
                         : 
-                        <button style={{marginTop: '15px'}}onClick={() => {
+                        <button style={{marginTop: '6px'}}onClick={() => {
                             setEdit(!edit)
                         }}>edit username & picture</button>}
                     </div>

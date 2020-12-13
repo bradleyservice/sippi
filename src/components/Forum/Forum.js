@@ -118,7 +118,7 @@ const Forum = (props) => {
                 <h5>{elem.title}</h5>
                 <p>{elem.content}</p>
                 {edit && props.user.id === elem.band_id ?
-                <form><div>
+                <form className='edit-forum'><div>
                     {inputs}
                     <button onClick={() => {
                         setPost(post)

@@ -1,11 +1,8 @@
 $primarycolor: #1b2c4e;
 $secondarycolor: #fca311;
 
-@mixin app-buttons-general {
-    background-color: white;
+%app-buttons-general {
     border: 2px solid $secondarycolor;
-    font-size: 16px;
-    font-weight: 500;
 }
 
 @mixin navbar {
@@ -23,7 +20,10 @@ $secondarycolor: #fca311;
 }
 
 button {
-    @include app-buttons-general();
+    @extend %app-buttons-general;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    border-radius: 5%;
 }
 
 .nav-button {
@@ -145,9 +145,12 @@ a:active {
     color: white;
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 800px){
+    .nav-bar {
+        height: 10vh;
+    }
     .logo {
-        font-size: 50px;
+        font-size: 80px;
         /* display: flex;
         justify-content: flex-start; */
     }
@@ -161,7 +164,7 @@ a:active {
         display: flex;
         flex-direction: column;
         margin: auto;
-        min-width: 100px;
+        min-width: 150px;
     }
     .logo-and-search {
         display: flex;

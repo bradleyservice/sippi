@@ -4,12 +4,17 @@
     // align-items: center;
 }
 
+%border {
+    border: 2px solid black;
+}
+
 .profile-comp {
     @include profile-component();
 }
 
 .band-photo {
     width: 300px;
+    border: 4px solid black;
     }
 
 .user-photo {
@@ -30,9 +35,9 @@
     height: 70vh;
     display: flex;
     flex-direction: column;
-    border: 1px solid black; 
+    @extend %border; 
     margin: 10px;
-    // background-image: linear-gradient( #1b2c4e, #fca311);
+    background-color: #f2f2f2;
 }
 
 .user-info {
@@ -48,14 +53,34 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    // margin-top: -110px;
 
     .info {
         margin: 50px;
+        @extend %border;
+        background-color: #f2f2f2;
     }
 }
 
-@media screen and (max-width: 850px){
+.band-info-page {
+    width: 66vw;
+}
+
+@media screen and (max-width: 800px){
+    .band-photo {
+        width: 200px;
+    }
+
+    .bar {
+        display: none;
+    }
+
+    .band-info-page {
+        margin-top: 20px;
+        width: 70vw;
+    }
+}
+
+@media screen and (max-width: 450px){
     .profile-comp {
         display: inline-block;
     }
@@ -74,14 +99,19 @@
 
     .user-info {
         display: flex;
-        width: 50vw;
+        width: 80vw;
         height: 10vh;
+        font-size: 16px;
     }
-        
-    .info {
-        font-size: 10px;
-        margin: 30px 10px 0px 10px;
-        min-width: 150px;
+    
+    .band-info {
+        width: 100vw;
+    
+        .info {
+            font-size: 10px;
+            margin: 30px 10px 0px 10px;
+            min-width: 150px;
+        }
     }
     
     .bar {
@@ -89,8 +119,10 @@
     }
 
     .band-info-page {
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 90vw;
     }
 }
