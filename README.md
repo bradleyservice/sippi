@@ -1,3 +1,7 @@
+# Sippi
+
+Sippi is a social media application designed with musicians and bands in mind, geared towards musicians who are actively touring. The app presents the user a dashboard, which displays every users posts about upcoming events or shows. The user is able to build out a profile for themselves and their band. There is also a forum for users to communicate with one another, figuring out the best places to play, good places to stay and good contacts to have in cities across the country. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
